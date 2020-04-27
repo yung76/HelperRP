@@ -2,5 +2,6 @@
 ## Version: 1.0
 ## Author: Marcos Andres
 ## Interface: 80205
+## Notes: Para anotar los puntos
 
 Frame.xml
