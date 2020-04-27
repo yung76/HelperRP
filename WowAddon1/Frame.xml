@@ -1,0 +1,538 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="Frame.lua" />
+	<Frame name="principal" parent="UIParent" toplevel="true" enableMouse="true">
+		<Size x="183" y="390" />
+		<Anchors>
+			<Anchor point="CENTER" x="-389" y="190" />
+		</Anchors>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32" />
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString inherits="GameFontNormal" text="Ingresa cantidad de enemigos - Solo hasta 5">
+					<Size x="111" y="59" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="40" y="-22" />
+					</Anchors>
+				</FontString>
+				<FontString inherits="GameFontNormal" text="Ingresa cantidad de vida por enemigo">
+					<Size x="120" y="44" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="31" y="-120" />
+					</Anchors>
+				</FontString>
+				<FontString inherits="GameFontNormal" text="Es un jefe?">
+					<Size x="80" y="20" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="69" y="-211" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button inherits="UIPanelButtonTemplate" text="Generar enemigos">
+				<Size x="120" y="46" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="31" y="-260" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						Button1_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="cantidad_enemigo" inherits="InputBoxTemplate" enableMouseClicks="true" enableKeyboard="true" numeric="true" autoFocus="false">
+				<Size x="109" y="32" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="40" y="-87" />
+				</Anchors>
+				<Scripts>
+					<OnTextChanged>
+						EditBox1_OnTextChanged()
+					</OnTextChanged>
+				</Scripts>
+			</EditBox>
+			<EditBox name="vida_enemigos" inherits="InputBoxTemplate" enableMouseClicks="true" enableKeyboard="true" autoFocus="false">
+				<Size x="111" y="32" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="40" y="-170" />
+				</Anchors>
+			</EditBox>
+			<CheckButton name="es_jefe" inherits="UICheckButtonTemplate" text="CheckButton1">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="40" y="-208" />
+				</Anchors>
+			</CheckButton>
+			<Button name="cerrar_principal" inherits="UIPanelButtonTemplate" text="X">
+				<Size x="28" y="22" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="152" y="-5" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						cerrar_principal_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="limpiar" inherits="UIPanelButtonTemplate" text="Limpiar">
+				<Size x="75" y="23" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="49" y="-312" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						limpiar_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="publicar" inherits="UIPanelButtonTemplate" text="Publicar Estado">
+				<Size x="138" y="23" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="22" y="-341" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						publicar_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				Frame1_OnLoad()
+			</OnLoad>
+		</Scripts>
+	</Frame>
+	<Frame name="contenedor_enemigo_1" hidden="true" movable="true" resizable="true">
+		<Size x="391" y="107" />
+		<Anchors>
+			<Anchor point="CENTER" x="-96" y="279" />
+		</Anchors>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />
+			</BackgroundInsets>
+			<TileSize val="32" />
+			<EdgeSize val="32" />
+		</Backdrop>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString inherits="GameFontNormal" text="Nombre 1">
+					<Size x="80" y="20" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="23" y="-29" />
+					</Anchors>
+				</FontString>
+				<FontString inherits="GameFontNormal" text="Cantidad Vida 1">
+					<Size x="109" y="20" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="23" y="-58" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<EditBox name="nombre_enemigo1" inherits="InputBoxTemplate" enableMouseClicks="true" enableKeyboard="true" font="" autoFocus="false">
+				<Size x="123" y="32" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="116" y="-20" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						nombre_enemigo1_OnLoad()
+					</OnLoad>
+				</Scripts>
+			</EditBox>
+			<Button name="btn_lanzar_dado1" inherits="UIPanelButtonTemplate" text="Lanzar Dados">
+				<Size x="92" y="23" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="245" y="-29" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btn_lanzar_dado1_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="cantidad_vida_enemigo1" inherits="InputBoxTemplate" enableMouseClicks="true" enableKeyboard="true" autoFocus="false">
+				<Size x="37" y="32" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="152" y="-58" />
+				</Anchors>
+			</EditBox>
+			<Button name="btn_publicar1" inherits="UIPanelButtonTemplate" text="Publicar">
+				<Size x="126" y="23" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="245" y="-67" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btn_publicar1_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="cerrar1" inherits="UIPanelButtonTemplate" text="X">
+				<Size x="28" y="22" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="360" y="-3" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						cerrar1_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="num_dado1" inherits="InputBoxTemplate" enableMouseClicks="true" enableKeyboard="true" numeric="true" autoFocus="false">
+				<Size x="27" y="32" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="343" y="-26" />
+				</Anchors>
+			</EditBox>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				contenedor_enemigo_12_OnLoad()
+			</OnLoad>
+		</Scripts>
+	</Frame>
+	<Frame name="contenedor_enemigo_2" hidden="true" movable="true">
+		<Size x="391" y="105" />
+		<Anchors>
+			<Anchor point="CENTER" x="-96" y="174" />
+		</Anchors>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />
+			</BackgroundInsets>
+			<TileSize val="32" />
+			<EdgeSize val="32" />
+		</Backdrop>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString inherits="GameFontNormal" text="Nombre 2">
+					<Size x="80" y="20" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="23" y="-29" />
+					</Anchors>
+				</FontString>
+				<FontString inherits="GameFontNormal" text="Cantidad Vida 2">
+					<Size x="109" y="20" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="23" y="-58" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<EditBox name="nombre_enemigo2" inherits="InputBoxTemplate" enableMouseClicks="true" enableKeyboard="true" autoFocus="false">
+				<Size x="123" y="32" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="116" y="-20" />
+				</Anchors>
+			</EditBox>
+			<Button name="btn_lanzar_dado2" inherits="UIPanelButtonTemplate" text="Lanzar Dados">
+				<Size x="92" y="23" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="245" y="-29" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btn_lanzar_dado2_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="cantidad_vida_enemigo2" inherits="InputBoxTemplate" enableMouseClicks="true" enableKeyboard="true" autoFocus="false">
+				<Size x="37" y="32" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="152" y="-58" />
+				</Anchors>
+			</EditBox>
+			<Button name="btn_publicar2" inherits="UIPanelButtonTemplate" text="Publicar">
+				<Size x="126" y="23" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="245" y="-67" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btn_publicar2_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="cerrar2" inherits="UIPanelButtonTemplate" text="X">
+				<Size x="28" y="22" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="360" y="-3" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						cerrar2_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="num_dado2" inherits="InputBoxTemplate" enableMouseClicks="true" enableKeyboard="true" numeric="true" autoFocus="false">
+				<Size x="27" y="32" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="343" y="-29" />
+				</Anchors>
+			</EditBox>
+		</Frames>
+	</Frame>
+	<Frame name="contenedor_enemigo_3" hidden="true" movable="true">
+		<Size x="391" y="105" />
+		<Anchors>
+			<Anchor point="CENTER" x="-96" y="63" />
+		</Anchors>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />
+			</BackgroundInsets>
+			<TileSize val="32" />
+			<EdgeSize val="32" />
+		</Backdrop>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString inherits="GameFontNormal" text="Nombre 3">
+					<Size x="80" y="20" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="23" y="-29" />
+					</Anchors>
+				</FontString>
+				<FontString inherits="GameFontNormal" text="Cantidad Vida 3">
+					<Size x="109" y="20" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="23" y="-58" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<EditBox name="nombre_enemigo3" inherits="InputBoxTemplate" enableMouseClicks="true" enableKeyboard="true" autoFocus="false">
+				<Size x="123" y="32" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="116" y="-20" />
+				</Anchors>
+			</EditBox>
+			<Button name="btn_lanzar_dado3" inherits="UIPanelButtonTemplate" text="Lanzar Dados">
+				<Size x="92" y="23" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="245" y="-29" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btn_lanzar_dado3_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="cantidad_vida_enemigo3" inherits="InputBoxTemplate" enableMouseClicks="true" enableKeyboard="true" autoFocus="false">
+				<Size x="37" y="32" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="152" y="-58" />
+				</Anchors>
+			</EditBox>
+			<Button name="btn_publicar3" inherits="UIPanelButtonTemplate" text="Publicar">
+				<Size x="126" y="23" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="245" y="-67" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btn_publicar3_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="cerrar3" inherits="UIPanelButtonTemplate" text="X">
+				<Size x="28" y="22" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="360" y="-3" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						cerrar3_OnClick()
+					</OnClick>
+				</Scripts>
+				<HighlightTexture inherits="UIPanelButtonHighlightTexture" file="Interface\BUTTONS\UI-Panel-Button-Highlight" alphaMode="ADD">
+					<TexCoords left="0" right="0.625" top="0" bottom="0.6875" />
+				</HighlightTexture>
+			</Button>
+			<EditBox name="num_dado3" inherits="InputBoxTemplate" enableMouseClicks="true" enableKeyboard="true" numeric="true" autoFocus="false">
+				<Size x="27" y="32" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="343" y="-29" />
+				</Anchors>
+			</EditBox>
+		</Frames>
+	</Frame>
+	<Frame name="contenedor_enemigo_4" hidden="true" movable="true">
+		<Size x="391" y="105" />
+		<Anchors>
+			<Anchor point="CENTER" x="-96" y="-48" />
+		</Anchors>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />
+			</BackgroundInsets>
+			<TileSize val="32" />
+			<EdgeSize val="32" />
+		</Backdrop>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString inherits="GameFontNormal" text="Nombre 4">
+					<Size x="80" y="20" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="23" y="-29" />
+					</Anchors>
+				</FontString>
+				<FontString inherits="GameFontNormal" text="Cantidad Vida 4">
+					<Size x="109" y="20" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="23" y="-58" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<EditBox name="nombre_enemigo4" inherits="InputBoxTemplate" enableMouseClicks="true" enableKeyboard="true" autoFocus="false">
+				<Size x="123" y="32" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="116" y="-20" />
+				</Anchors>
+			</EditBox>
+			<Button name="btn_lanzar_dado4" inherits="UIPanelButtonTemplate" text="Lanzar Dados">
+				<Size x="92" y="23" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="245" y="-29" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btn_lanzar_dado4_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="cantidad_vida_enemigo4" inherits="InputBoxTemplate" enableMouseClicks="true" enableKeyboard="true" autoFocus="false">
+				<Size x="37" y="32" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="152" y="-58" />
+				</Anchors>
+			</EditBox>
+			<Button name="btn_publicar4" inherits="UIPanelButtonTemplate" text="Publicar">
+				<Size x="126" y="23" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="245" y="-67" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btn_publicar4_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="cerrar4" inherits="UIPanelButtonTemplate" text="X">
+				<Size x="28" y="22" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="360" y="-3" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						cerrar4_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="num_dado4" inherits="InputBoxTemplate" enableMouseClicks="true" enableKeyboard="true" numeric="true" autoFocus="false">
+				<Size x="27" y="32" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="343" y="-29" />
+				</Anchors>
+			</EditBox>
+		</Frames>
+	</Frame>
+	<Frame name="contenedor_enemigo_5" hidden="true" movable="true">
+		<Size x="391" y="105" />
+		<Anchors>
+			<Anchor point="CENTER" x="-96" y="-159" />
+		</Anchors>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />
+			</BackgroundInsets>
+			<TileSize val="32" />
+			<EdgeSize val="32" />
+		</Backdrop>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString inherits="GameFontNormal" text="Nombre 5">
+					<Size x="80" y="20" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="23" y="-29" />
+					</Anchors>
+				</FontString>
+				<FontString inherits="GameFontNormal" text="Cantidad Vida 5">
+					<Size x="109" y="20" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="23" y="-58" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<EditBox name="nombre_enemigo5" inherits="InputBoxTemplate" enableMouseClicks="true" enableKeyboard="true" autoFocus="false">
+				<Size x="123" y="32" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="116" y="-20" />
+				</Anchors>
+			</EditBox>
+			<Button name="btn_lanzar_dados5" inherits="UIPanelButtonTemplate" text="Lanzar Dados">
+				<Size x="92" y="23" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="245" y="-29" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btn_lanzar_dados5_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="cantidad_vida_enemigo5" inherits="InputBoxTemplate" enableMouseClicks="true" enableKeyboard="true" autoFocus="false">
+				<Size x="37" y="32" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="152" y="-58" />
+				</Anchors>
+			</EditBox>
+			<Button name="btn_publicar5" inherits="UIPanelButtonTemplate" text="Publicar">
+				<Size x="126" y="23" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="245" y="-67" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btn_publicar5_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="cerrar5" inherits="UIPanelButtonTemplate" text="X">
+				<Size x="28" y="22" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="360" y="-3" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						cerrar5_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="num_dado5" inherits="InputBoxTemplate" enableMouseClicks="true" enableKeyboard="true" numeric="true" autoFocus="false">
+				<Size x="27" y="32" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="343" y="-29" />
+				</Anchors>
+			</EditBox>
+		</Frames>
+	</Frame>
+</Ui>
