@@ -1,6 +1,6 @@
 <Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="Frame.lua" />
-	<Frame name="principal" parent="UIParent" toplevel="true" enableMouse="true">
+	<Frame name="principal" parent="UIParent" toplevel="true" movable="true" enableMouse="true" dontSavePosition="true">
 		<Size x="183" y="390" />
 		<Anchors>
 			<Anchor point="CENTER" x="-389" y="190" />
@@ -106,16 +106,11 @@
 				</Scripts>
 			</Button>
 		</Frames>
-		<Scripts>
-			<OnLoad>
-				Frame1_OnLoad()
-			</OnLoad>
-		</Scripts>
 	</Frame>
 	<Frame name="contenedor_enemigo_1" hidden="true" movable="true" resizable="true">
 		<Size x="391" y="107" />
 		<Anchors>
-			<Anchor point="CENTER" x="-96" y="279" />
+			<Anchor point="CENTER" x="-62" y="310" />
 		</Anchors>
 		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
 			<BackgroundInsets>
@@ -201,13 +196,21 @@
 		<Scripts>
 			<OnLoad>
 				contenedor_enemigo_12_OnLoad()
+
+				self:RegisterForDrag("LeftButton");
 			</OnLoad>
+			<OnDragStart>
+				self:StartMoving();
+			</OnDragStart>
+			<OnDragStop>
+				self:StopMovingOrSizing();
+			</OnDragStop>
 		</Scripts>
 	</Frame>
 	<Frame name="contenedor_enemigo_2" hidden="true" movable="true">
 		<Size x="391" y="105" />
 		<Anchors>
-			<Anchor point="CENTER" x="-96" y="174" />
+			<Anchor point="CENTER" x="-62" y="205" />
 		</Anchors>
 		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
 			<BackgroundInsets>
@@ -289,7 +292,7 @@
 	<Frame name="contenedor_enemigo_3" hidden="true" movable="true">
 		<Size x="391" y="105" />
 		<Anchors>
-			<Anchor point="CENTER" x="-96" y="63" />
+			<Anchor point="CENTER" x="-62" y="94" />
 		</Anchors>
 		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
 			<BackgroundInsets>
@@ -374,7 +377,7 @@
 	<Frame name="contenedor_enemigo_4" hidden="true" movable="true">
 		<Size x="391" y="105" />
 		<Anchors>
-			<Anchor point="CENTER" x="-96" y="-48" />
+			<Anchor point="CENTER" x="-62" y="-17" />
 		</Anchors>
 		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
 			<BackgroundInsets>
@@ -456,7 +459,7 @@
 	<Frame name="contenedor_enemigo_5" hidden="true" movable="true">
 		<Size x="391" y="105" />
 		<Anchors>
-			<Anchor point="CENTER" x="-96" y="-159" />
+			<Anchor point="CENTER" x="-62" y="-128" />
 		</Anchors>
 		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
 			<BackgroundInsets>
@@ -534,5 +537,80 @@
 				</Anchors>
 			</EditBox>
 		</Frames>
+	</Frame>
+	<Frame name="panel_estado_jugadores">
+		<Size x="209" y="477" />
+		<Anchors>
+			<Anchor point="TOPLEFT" x="833" y="-3" />
+		</Anchors>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />
+			</BackgroundInsets>
+			<TileSize val="32" />
+			<EdgeSize val="32" />
+		</Backdrop>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString inherits="GameFontNormal" text="Listado de jugadores">
+					<Size x="160" y="20" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="25" y="-14" />
+					</Anchors>
+				</FontString>
+				<FontString inherits="GameFontNormal" text="Vidas por Jugador">
+					<Size x="108" y="20" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="14" y="-379" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<EditBox name="vida_por_jugador" inherits="InputBoxTemplate" enableMouseClicks="true" enableKeyboard="true" autoFocus="false">
+				<Size x="60" y="32" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="36" y="-399" />
+				</Anchors>
+			</EditBox>
+			<Button inherits="UIPanelButtonTemplate" text="Generar Lista">
+				<Size x="96" y="23" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="14" y="-433" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						Button2_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="publicar_estado_jugadores" inherits="UIPanelButtonTemplate" text="Publicar">
+				<Size x="75" y="23" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="111" y="-433" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						publicar_estado_jugadores_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="limpiar_lista_jugadores" inherits="UIPanelButtonTemplate" text="Limpiar">
+				<Size x="75" y="23" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="111" y="-405" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						limpiar_lista_jugadores_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				panel_estado_jugadores_OnLoad()
+			</OnLoad>
+		</Scripts>
 	</Frame>
 </Ui>
