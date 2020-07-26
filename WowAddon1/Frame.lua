@@ -62,7 +62,11 @@ end
 
 --botones de lanzar dados de cada enemigo
 function btn_lanzar_dado1_OnClick()
-	SendChatMessage(nombre_enemigo1:GetText().." Lanzo dados y obtuvo "..lanzar_dado(num_dado1:GetText()).." (1-"..num_dado1:GetText()..")", "RAID_WARNING")
+	--RaidWarningFrame.slot1:SetTextColor(9,0,255)
+	ChangeChatColor("RAID_WARNING", 255, 0, 9);
+	SendAddonMessage( "HRP", "HOLA MUNDO!!!!", "RAID_WARNING" );
+	print("asdasdasd")
+	--SendChatMessage(nombre_enemigo1:GetText().." Lanzo dados y obtuvo "..lanzar_dado(num_dado1:GetText()).." (1-"..num_dado1:GetText()..")", "RAID_WARNING")
 end
 
 function btn_lanzar_dado2_OnClick()
@@ -227,4 +231,8 @@ end
 function publicar_estado_jugadores_OnClick()
 	lista_filtrada = string.gsub(ListPlayers:GetText(),"\n"," ")
 	SendChatMessage("Recuento de vidas de los Jugadores = "..lista_filtrada, "RAID_WARNING")
+end
+
+function principal_OnLoad()
+	
 end
