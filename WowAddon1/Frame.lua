@@ -62,10 +62,6 @@ end
 
 --botones de lanzar dados de cada enemigo
 function btn_lanzar_dado1_OnClick()
-	--RaidWarningFrame.slot1:SetTextColor(9,0,255)
-	ChangeChatColor("RAID_WARNING", 255, 0, 9);
-	SendAddonMessage( "HRP", "HOLA MUNDO!!!!", "RAID_WARNING" );
-	print("asdasdasd")
 	--SendChatMessage(nombre_enemigo1:GetText().." Lanzo dados y obtuvo "..lanzar_dado(num_dado1:GetText()).." (1-"..num_dado1:GetText()..")", "RAID_WARNING")
 end
 
@@ -234,5 +230,20 @@ function publicar_estado_jugadores_OnClick()
 end
 
 function principal_OnLoad()
+	print("asdasdasd")
+
+
+	JoinTemporaryChannel("qwe",123, ChatFrame1:GetID());
+	print("asdasdasd11111111111111")
+end
+	local frame=CreateFrame("frame");
+	frame:RegisterEvent("CHAT_MSG_SAY");
+	frame:SetScript("OnEvent",function(self,event,message,author)
+		if event == "CHAT_MSG_SAY" and message:lower():match("hello") then
+			SendChatMessage("hi","PARTY");
+		end
+	end);
+
+function estado_jugadores_OnLoad()
 	
 end
